@@ -1,0 +1,32 @@
+{
+  "name": "oip-state",
+  "version": "1.0.0",
+  "description": "Easily manage a global application state for an OIP Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oipwg/oip-state.git"
+  },
+  "author": "Sky Young <sky@alexandria.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oipwg/oip-state/issues"
+  },
+  "homepage": "https://github.com/oipwg/oip-state#readme",
+  "dependencies": {
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "jest": "^23.5.0",
+    "@babel/cli": "^7.0.0-beta.51",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "babel-core": "^7.0.0-bridge.0",
+    "@babel/polyfill": "^7.0.0-beta.51"
+  }
+}
