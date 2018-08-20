@@ -1,5 +1,4 @@
 import Account from 'oip-account'
-import {fetchCryptoBalances, fetchWalletAddresses} from "../Wallet/thunks";
 
 import {
 	loginFetching,
@@ -9,8 +8,6 @@ import {
 	registerSuccess,
 	registerFailure,
 } from './actions'
-
-import {setMnemonic, setWallet} from "../Wallet/actions";
 
 export const accountRegister = (username, pw, options) => async (dispatch) => {
 	dispatch(registerFetching())
