@@ -2,7 +2,7 @@
   "name": "oip-state",
   "version": "1.0.0",
   "description": "Easily manage a global application state for an OIP Platform",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest"
   },
