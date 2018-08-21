@@ -4,7 +4,9 @@ import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 
 // Import our Reducers
-import reducers from './reducers'
+import Account from './reducers/Account'
+
+const reducers = [Account]
 
 // Create the logger to log Actions to the console
 const logger = createLogger({
@@ -33,4 +35,6 @@ const enhancer = composeEnhancers(
 const store = createStore(combineReducers(reducers), enhancer);
 
 // Export the store we created
-export store;
+module.exports = {
+	store
+};
