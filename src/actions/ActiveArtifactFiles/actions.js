@@ -15,7 +15,7 @@ export const setActiveArtifactFile = (uid) => ({
     uid
 })
 
-export const addToActiveFiles = (file, uid) => ({
+export const addToActiveArtifactFiles = (file, uid) => ({
     type: ADD_FILE,
     uid,
     isPaid: file.isPaid(),

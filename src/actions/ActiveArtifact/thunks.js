@@ -4,8 +4,7 @@ import {
     fetchArtifactError
 } from "./actions";
 
-import { addToActiveFiles } from '../ActiveArtifactFiles/actions'
-import { setActiveFile } from '../ActiveArtifactFiles/thunks'
+import { setActiveFile, addToActiveFiles } from '../ActiveArtifactFiles/thunks'
 
 // -------------------------------------------------------------------------------------------------
 // SELECT CURRENT ARTIFACT
