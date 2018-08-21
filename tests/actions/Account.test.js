@@ -4,10 +4,20 @@ describe('Account Actions', () => {
 	describe('Login', () => {
 		it("should prompt account login", () => {
 			const expected_action = {
-				type: actions.PROMPT_LOGIN
+				type: actions.PROMPT_LOGIN,
+				prompt: true
 			}
 
 			expect(actions.promptLogin()).toEqual(expected_action)
+		})
+
+		it("should prompt account login (false)", () => {
+			const expected_action = {
+				type: actions.PROMPT_LOGIN,
+				prompt: false
+			}
+
+			expect(actions.promptLogin(false)).toEqual(expected_action)
 		})
 
 		it("should set login fetching", () => {
@@ -44,10 +54,20 @@ describe('Account Actions', () => {
 	describe('Register', () => {
 		it("should prompt account register", () => {
 			const expected_action = {
-				type: actions.PROMPT_REGISTER
+				type: actions.PROMPT_REGISTER,
+				prompt: true
 			}
 
 			expect(actions.promptRegister()).toEqual(expected_action)
+		})
+
+		it("should prompt account register (false)", () => {
+			const expected_action = {
+				type: actions.PROMPT_REGISTER,
+				prompt: false
+			}
+
+			expect(actions.promptRegister(false)).toEqual(expected_action)
 		})
 
 		it("should set register fetching", () => {

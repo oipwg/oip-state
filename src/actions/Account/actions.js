@@ -16,8 +16,9 @@ export const LOGOUT = 'LOGOUT'
 
 
 // ------------ Login ------------
-export const promptLogin = () => ({
-	type: PROMPT_LOGIN
+export const promptLogin = (prompt) => ({
+	type: PROMPT_LOGIN,
+	prompt: prompt === undefined ? true : prompt
 })
 
 export const loginFetching = () => ({
@@ -36,8 +37,9 @@ export const loginFailure = (error_message) => ({
 
 
 // ------------ Register ------------
-export const promptRegister = () => ({
-	type: PROMPT_REGISTER
+export const promptRegister = (prompt) => ({
+	type: PROMPT_REGISTER,
+	prompt: prompt === undefined ? true : prompt
 })
 
 export const registerFetching = () => ({
