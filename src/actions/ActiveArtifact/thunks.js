@@ -24,7 +24,7 @@ export const setActiveArtifact = (artifact) => (dispatch) => {
     dispatch(setActiveFile(artifact, files[0]))
 }
 
-export const loadActiveArtifact = (txid) => async (dispatch, getState) => {
+export const loadActiveArtifact = (txid, callback) => async (dispatch, getState) => {
     dispatch(fetchingArtifact());
 
     let state = getState();
@@ -32,6 +32,10 @@ export const loadActiveArtifact = (txid) => async (dispatch, getState) => {
         let artifact = await state.OIPIndex.Index.getArtifact(txid)
         // Set the Active Artifact
         dispatch(setActiveArtifact(artifact))
+
+        // Pass back the artifact to a callback if provided
+        if (callback)
+            callback(artifact)
     } catch (e) {
         dispatch(fetchArtifactError("Error fetching Artifact!"))
         console.error(e)
