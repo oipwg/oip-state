@@ -16,7 +16,7 @@ export const accountRegister = (username, pw, options) => async (dispatch) => {
 
 	dispatch(registerFetching())
 
-	let account = new Account(username, pw, {keystore_url: "https://mk1.alexandria.io/keystore/"});
+	let account = new Account(username, pw, {keystore_url: "https://mk1.alexandria.io/keystore/", store_in_keystore: true});
 
 	try {
 		await account.create()
@@ -34,7 +34,7 @@ export const accountLogin = (username, pw, options) => async (dispatch) => {
 
 	dispatch(loginFetching())
 
-	let account = new Account(username, pw, {keystore_url: "https://mk1.alexandria.io/keystore/"})
+	let account = new Account(username, pw, {keystore_url: "https://mk1.alexandria.io/keystore/", store_in_keystore: true})
 
 	try {
 		await account.login()
