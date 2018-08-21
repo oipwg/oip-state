@@ -1,4 +1,3 @@
-import * as actions from '../actions/OIPIndex/actions'
 import { Index } from "oip-index";
 
 let Network = new Index()
