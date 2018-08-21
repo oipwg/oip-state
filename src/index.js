@@ -5,9 +5,10 @@ import { createLogger } from 'redux-logger'
 
 // Import our Reducers
 import Account from './reducers/Account'
+import ActiveArtifact from './reducers/ActiveArtifact'
 import OIPIndex from './reducers/OIPIndex'
 
-const reducers = { Account, OIPIndex }
+const reducers = { Account, ActiveArtifact, OIPIndex }
 
 // Create the logger to log Actions to the console
 const logger = createLogger({
