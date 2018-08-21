@@ -6,7 +6,7 @@ import { createLogger } from 'redux-logger'
 // Import our Reducers
 import Account from './reducers/Account'
 
-const reducers = [Account]
+const reducers = { Account }
 
 // Create the logger to log Actions to the console
 const logger = createLogger({
