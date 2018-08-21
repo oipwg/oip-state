@@ -1,11 +1,29 @@
 import {
     fetchingArtifact,
-    setActiveArtifact,
+    _setActiveArtifact,
     fetchArtifactError
 } from "./actions";
 
+import { addToActiveFiles } from '../ActiveArtifactFiles/actions'
+import { setActiveFile } from '../ActiveArtifactFiles/thunks'
+
 // -------------------------------------------------------------------------------------------------
 // SELECT CURRENT ARTIFACT
+
+export const setActiveArtifact = (artifact) => (dispatch) => {
+    // Set the Active Artifact
+    dispatch(_setActiveArtifact(artifact))
+
+    // Get all the files in the Artifact
+    let files = artifact.getFiles()
+    // Add all Files to the ActiveFiles
+    for (let i = 0; i < files.length; i++){
+        dispatch(addToActiveFiles(artifact, files[i]))
+    }
+
+    // Set the first file to be active (by default)
+    dispatch(setActiveFile(artifact, files[0]))
+}
 
 export const loadActiveArtifact = (txid) => async (dispatch, getState) => {
     dispatch(fetchingArtifact());
@@ -13,6 +31,7 @@ export const loadActiveArtifact = (txid) => async (dispatch, getState) => {
     let state = getState();
     try {
         let artifact = await state.OIPIndex.Index.getArtifact(txid)
+        // Set the Active Artifact
         dispatch(setActiveArtifact(artifact))
     } catch (e) {
         dispatch(fetchArtifactError("Error fetching Artifact!"))

@@ -8,7 +8,7 @@ export const fetchingArtifact = () => ({
     type: ARTIFACT_FETCHING
 })
 
-export const setActiveArtifact = (artifact) => ({
+export const _setActiveArtifact = (artifact) => ({
     type: ARTIFACT_SUCCESS,
     artifact: artifact
 })
