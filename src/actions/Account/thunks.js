@@ -1,4 +1,4 @@
-import Account from 'oip-account'
+import { Account } from 'oip-account'
 
 import {
 	loginFetching,
