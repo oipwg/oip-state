@@ -17,12 +17,16 @@ const Account = (state = {
 		case actions.PROMPT_LOGIN:
 			return {
 				...state,
+				showLoginModal: action.prompt,
 				loginFetching: false,
 				loginFailure: false,
-				loginErrorMessage: undefined,
 				isLoggedIn: false,
-				showLoginModal: action.prompt,
-				showRegisterModal: false
+				loginErrorMessage: undefined,
+				showRegisterModal: false,
+				registerFetching: false,
+				registerFailure: false,
+				registerSuccess: false,
+				registerErrorMessage: undefined
 			}
 		case actions.LOGIN_FETCHING:
 			return {
@@ -53,6 +57,11 @@ const Account = (state = {
 		case actions.PROMPT_REGISTER:
 			return {
 				...state,
+				showLoginModal: false,
+				loginFetching: false,
+				loginFailure: false,
+				isLoggedIn: false,
+				loginErrorMessage: undefined,
 				showRegisterModal: action.prompt,
 				registerFetching: false,
 				registerFailure: false,
