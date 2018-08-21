@@ -16,13 +16,15 @@ const logger = createLogger({
 // Create Redux Middleware
 let middleware = [ logger, thunk ];
 
+let composeEnhancers
+
 // Compose a "name" for the window.
 if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__){
-	const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+	composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         name: "OIP State"
     }) 
 } else {
-	const composeEnhancers = compose
+	composeEnhancers = compose
 }
 
 // Use the Middlewear and create an "enhancer"
