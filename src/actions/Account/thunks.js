@@ -10,6 +10,10 @@ import {
 } from './actions'
 
 export const accountRegister = (username, pw, options) => async (dispatch) => {
+	if (!options) options = {}
+	if (!options.keystore_url)
+		options.keystore_url = "https://mk1.alexandria.io/keystore/"
+
 	dispatch(registerFetching())
 
 	let account = new Account(username, pw, options);
@@ -24,6 +28,10 @@ export const accountRegister = (username, pw, options) => async (dispatch) => {
 }
 
 export const accountLogin = (username, pw, options) => async (dispatch) => {
+	if (!options) options = {}
+	if (!options.keystore_url)
+		options.keystore_url = "https://mk1.alexandria.io/keystore/"
+	
 	dispatch(loginFetching())
 
 	let account = new Account(username, pw, options)
