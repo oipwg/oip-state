@@ -10,13 +10,24 @@ import {
 } from './actions'
 
 export const accountRegister = (username, pw, options) => async (dispatch) => {
-	if (!options) options = {}
+	// Create options if it isn't passed
+	if (!options) 
+		options = {}
+
+	// Default store in Keystore
 	if (!options.keystore_url)
 		options.keystore_url = "https://mk1.alexandria.io/keystore/"
 
+	if (options.store_in_keystore === undefined)
+		options.store_in_keystore = true
+
+	// Default don't discover
+	if (options.discover === undefined)
+		options.discover = false
+
 	dispatch(registerFetching())
 
-	let account = new Account(username, pw, {keystore_url: "https://mk1.alexandria.io/keystore/", store_in_keystore: true});
+	let account = new Account(username, pw, options);
 
 	try {
 		await account.create()
@@ -28,13 +39,24 @@ export const accountRegister = (username, pw, options) => async (dispatch) => {
 }
 
 export const accountLogin = (username, pw, options) => async (dispatch) => {
-	if (!options) options = {}
+	// Create options if it isn't passed
+	if (!options) 
+		options = {}
+
+	// Default store in Keystore
 	if (!options.keystore_url)
 		options.keystore_url = "https://mk1.alexandria.io/keystore/"
 
+	if (options.store_in_keystore === undefined)
+		options.store_in_keystore = true
+
+	// Default don't discover
+	if (options.discover === undefined)
+		options.discover = false
+
 	dispatch(loginFetching())
 
-	let account = new Account(username, pw, {keystore_url: "https://mk1.alexandria.io/keystore/", store_in_keystore: true})
+	let account = new Account(username, pw, options)
 
 	try {
 		await account.login()
