@@ -1,6 +1,6 @@
 import * as actions from '../actions/Account/actions'
 
-export const Account = (state = {
+const Account = (state = {
 	Account: undefined,
 	showLoginModal: false,
 	loginFetching: false,
@@ -105,3 +105,5 @@ export const Account = (state = {
 			return state
 	}
 }
+
+export default Account;
