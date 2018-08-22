@@ -42,7 +42,7 @@ const file = (state = {
 				payErrorBuy: false,
 				payErrorTextBuy: undefined
 			}
-		case actions.FILE_PLAY_PAY_IN_PROGRESS:
+		case actions.FILE_PAY_IN_PROGRESS_PLAY:
 			return {
 				...state,
 				hasPaid: false,
@@ -51,7 +51,7 @@ const file = (state = {
 				payErrorPlay: false,
 				payErrorTextPlay: undefined
 			}
-		case actions.FILE_BUY_PAY_IN_PROGRESS:
+		case actions.FILE_PAY_IN_PROGRESS_BUY:
 			return {
 				...state,
 				owned: false,
@@ -60,7 +60,7 @@ const file = (state = {
 				payErrorBuy: false,
 				payErrorTextBuy: undefined
 			}
-		case actions.FILE_PLAY_PAY_ERROR:
+		case actions.FILE_PAY_ERROR_PLAY:
 			return {
 				...state,
 				hasPaid: false,
@@ -69,7 +69,7 @@ const file = (state = {
 				payErrorPlay: true,
 				payErrorTextPlay: action.error
 			}
-		case actions.FILE_BUY_PAY_ERROR:
+		case actions.FILE_PAY_ERROR_BUY:
 			return {
 				...state,
 				owned: false,
