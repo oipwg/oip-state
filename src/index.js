@@ -44,6 +44,6 @@ const createStoreFn = () => {
 }
 
 // Export the store we created
-module.exports = {
+export default {
 	createStore: createStoreFn
-};
+}
