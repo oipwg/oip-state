@@ -86,6 +86,7 @@ const Account = (state = {
 		case actions.REGISTER_SUCCESS:
 			return {
 				...state,
+				isLoggedIn: true,
 				showRegisterModal: false,
 				registerFailure: false,
 				registerSuccess: true,
