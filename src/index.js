@@ -37,9 +37,13 @@ const enhancer = composeEnhancers(
 );
 
 // Create our Store
-const store = createStore(combineReducers(reducers), enhancer);
+// const store = createStore(combineReducers(reducers), enhancer);
+
+const createStoreFn = () => {
+	return createStore(combineReducers(reducers), enhancer)
+}
 
 // Export the store we created
 module.exports = {
-	store
+	createStore: createStoreFn
 };
