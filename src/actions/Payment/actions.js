@@ -4,7 +4,7 @@ export const SET_COINBASE_INFO = "SET_COINBASE_INFO"
 // -------------------------------------------------------------------------------------------------
 
 export const promptCoinbaseModal = (prompt) => ({
-    type: TOGGLE_COINBASE_MODAL,
+    type: PROMPT_COINBASE_MODAL,
     prompt: prompt === undefined ? true : prompt
 })
 
