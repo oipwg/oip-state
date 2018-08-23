@@ -28,7 +28,7 @@ export const setActiveFile = (artifact, file) => dispatch => {
 
 
 export const addToActiveFiles = (artifact, file) => dispatch => {
-    dispatch(addToActiveArtifactFiles(toUID(artifact, file)))
+    dispatch(addToActiveArtifactFiles(file, toUID(artifact, file)))
 }
 
 export const paymentSuccess = (artifact, file, type) => (dispatch) => {
