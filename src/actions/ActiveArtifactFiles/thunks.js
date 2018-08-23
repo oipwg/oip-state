@@ -1,11 +1,11 @@
 import { 
     setActiveArtifactFile, 
     addToActiveArtifactFiles,
-    filePaySuccessPlay,
+    filePaySuccessView,
     filePaySuccessBuy,
-    filePayInProgressPlay,
+    filePayInProgressView,
     filePayInProgressBuy,
-    filePayErrorPlay,
+    filePayErrorView,
     filePayErrorBuy
 } from "./actions";
 
@@ -36,8 +36,8 @@ export const paymentSuccess = (artifact, file, type) => (dispatch) => {
 
     if (type === "buy")
         dispatch(filePaySuccessBuy(uid))
-    else if (type === "play")
-        dispatch(filePaySuccessPlay(uid))
+    else if (type === "view")
+        dispatch(filePaySuccessView(uid))
 }
 
 export const paymentInProgress = (artifact, file, type) => (dispatch) => {
@@ -45,8 +45,8 @@ export const paymentInProgress = (artifact, file, type) => (dispatch) => {
 
     if (type === "buy")
         dispatch(filePayInProgressBuy(uid))
-    else if (type === "play")
-        dispatch(filePayInProgressPlay(uid))
+    else if (type === "view")
+        dispatch(filePayInProgressView(uid))
 }
 
 export const paymentError = (artifact, file, type, error_text) => (dispatch) => {
@@ -54,8 +54,8 @@ export const paymentError = (artifact, file, type, error_text) => (dispatch) => 
 
     if (type === "buy")
         dispatch(filePayErrorBuy(uid, error_text))
-    else if (type === "play")
-        dispatch(filePayErrorPlay(uid, error_text))
+    else if (type === "view")
+        dispatch(filePayErrorView(uid, error_text))
 }
 
 // -------------------------------------------------------------------------------------------------

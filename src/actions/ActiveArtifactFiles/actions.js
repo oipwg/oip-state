@@ -1,11 +1,11 @@
 export const SET_ACTIVE_FILE = 'SET_ACTIVE_FILE'
 export const ADD_FILE = 'ADD_FILE'
 export const CLEAR_ACTIVE_ARTIFACT_FILES = 'CLEAR_ACTIVE_ARTIFACT_FILES'
-export const FILE_PAY_SUCCESS_PLAY = 'FILE_PAY_SUCCESS_PLAY'
+export const FILE_PAY_SUCCESS_VIEW = 'FILE_PAY_SUCCESS_VIEW'
 export const FILE_PAY_SUCCESS_BUY = 'FILE_PAY_SUCCESS_BUY'
-export const FILE_PAY_IN_PROGRESS_PLAY = 'FILE_PAY_IN_PROGRESS_PLAY'
+export const FILE_PAY_IN_PROGRESS_VIEW = 'FILE_PAY_IN_PROGRESS_VIEW'
 export const FILE_PAY_IN_PROGRESS_BUY = 'FILE_PAY_IN_PROGRESS_BUY'
-export const FILE_PAY_ERROR_PLAY = 'FILE_PAY_ERROR_PLAY'
+export const FILE_PAY_ERROR_VIEW = 'FILE_PAY_ERROR_VIEW'
 export const FILE_PAY_ERROR_BUY = 'FILE_PAY_ERROR_BUY'
 
 // -------------------------------------------------------------------------------------------------
@@ -26,8 +26,8 @@ export const clearActiveArtifactFiles = () => ({
     type: CLEAR_ACTIVE_ARTIFACT_FILES
 })
 
-export const filePaySuccessPlay = (uid) => ({
-    type: FILE_PAY_SUCCESS_PLAY,
+export const filePaySuccessView = (uid) => ({
+    type: FILE_PAY_SUCCESS_VIEW,
     uid
 })
 
@@ -36,8 +36,8 @@ export const filePaySuccessBuy = (uid) => ({
     uid
 })
 
-export const filePayInProgressPlay = (uid) => ({
-    type: FILE_PAY_IN_PROGRESS_PLAY,
+export const filePayInProgressView = (uid) => ({
+    type: FILE_PAY_IN_PROGRESS_VIEW,
     uid
 })
 
@@ -46,8 +46,8 @@ export const filePayInProgressBuy = (uid) => ({
     uid
 })
 
-export const filePayErrorPlay = (uid, error) => ({
-    type: FILE_PAY_ERROR_PLAY,
+export const filePayErrorView = (uid, error) => ({
+    type: FILE_PAY_ERROR_VIEW,
     uid,
     error
 })

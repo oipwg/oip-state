@@ -5,13 +5,13 @@ const file = (state = {
 	isPaid: false,
 	hasPaid: false,
 
-	paySuccessPlay: false,
+	paySuccessView: false,
 	paySuccessBuy: false,
-	payInProgressPlay: false,
+	payInProgressView: false,
 	payInProgressBuy: false,
-	payErrorPlay: false,
+	payErrorView: false,
 	payErrorBuy: false,
-	payErrorTextPlay: undefined,
+	payErrorTextView: undefined,
 	payErrorTextBuy: undefined,
 	
 	ArtifactFile: undefined
@@ -24,14 +24,14 @@ const file = (state = {
 				owned: action.owned ? action.owned : false,
 				ArtifactFile: action.file
 			}
-		case actions.FILE_PAY_SUCCESS_PLAY:
+		case actions.FILE_PAY_SUCCESS_VIEW:
 			return {
 				...state,
 				hasPaid: true,
-				paySuccessPlay: true,
-				payInProgressPlay: false,
-				payErrorPlay: false,
-				payErrorTextPlay: undefined
+				paySuccessView: true,
+				payInProgressView: false,
+				payErrorView: false,
+				payErrorTextView: undefined
 			}
 		case actions.FILE_PAY_SUCCESS_BUY:
 			return {
@@ -42,14 +42,14 @@ const file = (state = {
 				payErrorBuy: false,
 				payErrorTextBuy: undefined
 			}
-		case actions.FILE_PAY_IN_PROGRESS_PLAY:
+		case actions.FILE_PAY_IN_PROGRESS_VIEW:
 			return {
 				...state,
 				hasPaid: false,
-				paySuccessPlay: false,
-				payInProgressPlay: true,
-				payErrorPlay: false,
-				payErrorTextPlay: undefined
+				paySuccessView: false,
+				payInProgressView: true,
+				payErrorView: false,
+				payErrorTextView: undefined
 			}
 		case actions.FILE_PAY_IN_PROGRESS_BUY:
 			return {
@@ -60,14 +60,14 @@ const file = (state = {
 				payErrorBuy: false,
 				payErrorTextBuy: undefined
 			}
-		case actions.FILE_PAY_ERROR_PLAY:
+		case actions.FILE_PAY_ERROR_VIEW:
 			return {
 				...state,
 				hasPaid: false,
-				paySuccessPlay: false,
-				payInProgressPlay: false,
-				payErrorPlay: true,
-				payErrorTextPlay: action.error
+				paySuccessView: false,
+				payInProgressView: false,
+				payErrorView: true,
+				payErrorTextView: action.error
 			}
 		case actions.FILE_PAY_ERROR_BUY:
 			return {
@@ -88,11 +88,11 @@ const ActiveArtifactFiles = (state = {
 }, action) => {
 	switch (action.type) {
 		case actions.ADD_FILE:
-		case actions.FILE_PAY_SUCCESS_PLAY:
+		case actions.FILE_PAY_SUCCESS_VIEW:
 		case actions.FILE_PAY_SUCCESS_BUY:
-		case actions.FILE_PAY_IN_PROGRESS_PLAY:
+		case actions.FILE_PAY_IN_PROGRESS_VIEW:
 		case actions.FILE_PAY_IN_PROGRESS_BUY:
-		case actions.FILE_PAY_ERROR_PLAY:
+		case actions.FILE_PAY_ERROR_VIEW:
 		case actions.FILE_PAY_ERROR_BUY:
 			return {
 				...state,
