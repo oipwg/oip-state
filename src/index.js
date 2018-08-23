@@ -8,8 +8,9 @@ import Account from './reducers/Account'
 import ActiveArtifact from './reducers/ActiveArtifact'
 import ActiveArtifactFiles from './reducers/ActiveArtifactFiles'
 import OIPIndex from './reducers/OIPIndex'
+import Payment from './reducers/Payment'
 
-const reducers = { Account, ActiveArtifact, ActiveArtifactFiles, OIPIndex }
+const reducers = { Account, ActiveArtifact, ActiveArtifactFiles, OIPIndex, Payment }
 
 // Create the logger to log Actions to the console
 const logger = createLogger({
