@@ -46,12 +46,14 @@ export const filePayInProgressBuy = (uid) => ({
     uid
 })
 
-export const filePayErrorPlay = (uid) => ({
+export const filePayErrorPlay = (uid, error) => ({
     type: FILE_PAY_ERROR_PLAY,
-    uid
+    uid,
+    error
 })
 
-export const filePayErrorBuy = (uid) => ({
+export const filePayErrorBuy = (uid, error) => ({
     type: FILE_PAY_ERROR_BUY,
-    uid
+    uid,
+    error
 })

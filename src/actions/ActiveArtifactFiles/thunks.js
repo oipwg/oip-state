@@ -49,13 +49,13 @@ export const paymentInProgress = (artifact, file, type) => (dispatch) => {
         dispatch(filePayInProgressPlay(uid))
 }
 
-export const paymentError = (artifact, file, type) => (dispatch) => {
+export const paymentError = (artifact, file, type, error_text) => (dispatch) => {
     let uid = toUID(artifact, file)
 
     if (type === "buy")
-        dispatch(filePayErrorBuy(uid))
+        dispatch(filePayErrorBuy(uid, error_text))
     else if (type === "play")
-        dispatch(filePayErrorPlay(uid))
+        dispatch(filePayErrorPlay(uid, error_text))
 }
 
 // -------------------------------------------------------------------------------------------------
