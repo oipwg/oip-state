@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/oipwg/oip-state#readme",
   "dependencies": {
-    "oip-account": "^1.1.6",
+    "oip-account": "^1.1.7",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
