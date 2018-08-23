@@ -1,4 +1,4 @@
-import * as actions from '../actions/Wallet/actions'
+import * as actions from '../actions/Payment/actions'
 
 export const Wallet = (state = {
 	showCoinbaseModal: false,
