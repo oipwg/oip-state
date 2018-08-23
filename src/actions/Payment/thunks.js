@@ -103,7 +103,7 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 
 		// If we didn't grab a coin that Coinbase can use, then throw a payment error.
 		if (!coinbase_coin){
-			dispatch(paymentError(artifact, file, type, `Unable to find a supported Coinbase Coin! ${artifact_supported_coins}`))
+			dispatch(paymentError(artifact, file, type, "Unable to find a supported Coinbase Coin!" + JSON.stringify(artifact_supported_coins, null, 4)))
 
 			// Prevent further execution. We don't have the funds and can't buy more.
 			return
@@ -129,7 +129,7 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 				// rerun preprocess function to update stuff.
 				preprocess = await payment_builder.getPaymentAddressAndAmount()
 			} catch (err) {
-				dispatch(paymentError(artifact, file, type, "Error waiting for Coinbase!"))
+				dispatch(paymentError(artifact, file, type, "Error waiting for Coinbase! " + JSON.stringify(err, null, 4)))
 
 				// There was an error/cancel, prevent further execution
 				return
@@ -147,11 +147,11 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 			dispatch(paymentSuccess(artifact, file, type))
 		} catch (err) {
 			// Fail on payment error
-			dispatch(paymentError(artifact, file, type, `Error sending payment! ${err}`))
+			dispatch(paymentError(artifact, file, type, "Error sending payment!" + JSON.stringify(err)))
 		}
 	} else {
 		// Fail on preprocess error
-		dispatch(paymentError(artifact, file, type, `Preprocess not successful after Coinbase Attempt! ${preprocess}`))
+		dispatch(paymentError(artifact, file, type, "Preprocess not successful after Coinbase Attempt!" + JSON.stringify(preprocess, null, 4)))
 	}
 }
 
