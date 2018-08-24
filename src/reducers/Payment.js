@@ -1,6 +1,6 @@
 import * as actions from '../actions/Payment/actions'
 
-export const Wallet = (state = {
+const Payment = (state = {
 	showCoinbaseModal: false,
 	coinbaseInfo: {}
 }, action) => {
@@ -19,3 +19,5 @@ export const Wallet = (state = {
 			return state
 	}
 }
+
+export default Payment
