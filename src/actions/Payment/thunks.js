@@ -148,6 +148,18 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 		} catch (err) {
 			// Fail on payment error
 			dispatch(paymentError(artifact, file, type, "Error sending payment!" + JSON.stringify(err)))
+
+			// Return to prevent further execution
+			return
+		}
+
+		// This should only run if we were fully successful.
+		// Save the updated Wallet State to the Account Store
+		let account = getState().Account.Account
+		try {
+			await account.store()
+		} catch (err){
+			console.error("Unable to save updated Account to Store! " + err)
 		}
 	} else {
 		// Fail on preprocess error
