@@ -31,8 +31,13 @@ export const addToActiveFiles = (artifact, file) => dispatch => {
     dispatch(addToActiveArtifactFiles(file, toUID(artifact, file)))
 }
 
-export const paymentSuccess = (artifact, file, type) => (dispatch) => {
+export const paymentSuccess = (artifact, file, type) => (dispatch, getState) => {
     let uid = toUID(artifact, file)
+
+    let state = getState()
+
+    if (state.ActiveArtifactFiles.active !== uid)
+        dispatch(setActiveArtifactFile(uid))
 
     if (type === "buy")
         dispatch(filePaySuccessBuy(uid))
