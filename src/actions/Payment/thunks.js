@@ -147,7 +147,7 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 			dispatch(paymentSuccess(artifact, file, type))
 		} catch (err) {
 			// Fail on payment error
-			dispatch(paymentError(artifact, file, type, "Error sending payment!" + JSON.stringify(err)))
+			dispatch(paymentError(artifact, file, type, "Error sending payment!" + err))
 
 			// Return to prevent further execution
 			return
