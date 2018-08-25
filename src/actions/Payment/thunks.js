@@ -6,6 +6,8 @@ import {
 } from "./actions"
 
 import {
+	toUID,
+	setActiveFile,
 	paymentSuccess,
 	paymentInProgress,
 	paymentError
@@ -73,7 +75,50 @@ const waitForCoinbase = (dispatch, getState, address) => {
 	})
 }
 
+let checkIfAlreadyPaid = (artifact, file, type, getState) => {
+	let state = getState()
+
+	let uid = toUID(artifact, file)
+
+	if (state.ActiveArtifactFiles[uid]){
+		if (state.ActiveArtifactFiles[uid].isPaid){
+			// If the type is view, and we either have paid, or own the file, then return that we have already paid
+			if (type === "view" && (state.ActiveArtifactFiles[uid].hasPaid || state.ActiveArtifactFiles[uid].owned)){
+				return true
+			}
+			// If the type is buy, and we already own the file, then return that we have already paid
+			if (type === "buy" && state.ActiveArtifactFiles[uid].owned){
+				return true
+			}
+
+			// If we have not returned yet, that means we have not yet paid. Return false.
+			return false
+		} else {
+			// Since the file is free, return that we have already paid
+			return true
+		}
+	}
+
+	// This is just here to catch weird issues, we should have already returned always up above.
+	
+	// Return false (not yet paid)
+	return false
+}
+
 export const payForArtifactFile = (artifact, file, type) => async (dispatch, getState) => {
+	// Check to see if we have already paid for the Artifact. If so, prevent payment.
+	if (checkIfAlreadyPaid(artifact, file, type, getState)){
+		let state = getState()
+
+		// Set the file to be active if we need.
+		if (state.ActiveArtifactFiles.active !== toUID(artifact, file)){
+			dispatch(setActiveFile(artifact, file))
+		}
+
+		// Since we have already been paid for, prevent further execution.
+		return
+	}
+
 	// Dispatch Payment in Progress
 	dispatch(paymentInProgress(artifact, file, type))
 

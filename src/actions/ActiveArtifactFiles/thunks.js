@@ -11,7 +11,7 @@ import {
 
 // -------------------------------------------------------------------------------------------------
 
-let toUID = (artifact, file) => {
+export const toUID = (artifact, file) => {
     let files = artifact.getFiles();
 
     for (var i = 0; i < files.length; i++) {
