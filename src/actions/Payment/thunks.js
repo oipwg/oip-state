@@ -136,9 +136,11 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 		await waitForLogin(dispatch, getState)
 	} catch (error) {
 		if (error){
-			paymentError(artifact, file, type, "Unable to Login or Register")
+			dispatch(paymentError(artifact, file, type, "Unable to Login or Register"))
+			return
 		} else {
-			paymentCancel(artifact, file, type)
+			dispatch(paymentCancel(artifact, file, type))
+			return
 		}
 	}
 
