@@ -3,10 +3,12 @@ const downloadFile = function(artifact, file){
 	if (typeof window !== 'undefined' && artifact && file){
 		let download_file_url = "https://gateway.ipfs.io/ipfs/" + artifact.getLocation() + "/" + file.getFilename()
 
-		let iframe = document.createElement('iframe');
-		iframe.style.display = "none";
-		iframe.src = download_file_url
-		window.document.body.appendChild(iframe);
+		let download_tag = document.createElement('a');
+		download_tag.style.display = "none";
+		download_tag.download = file.getFilename()
+		download_tag.target = "_blank"
+		download_tag.href = download_file_url
+		download_tag.click()
 	}
 }
 
