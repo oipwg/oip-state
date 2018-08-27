@@ -1,4 +1,4 @@
-import { downloadFile } from '../browser/util'
+import { downloadFile } from '../../browser/util'
 
 import { 
 	setActiveArtifactFile, 
