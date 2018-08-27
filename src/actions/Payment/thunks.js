@@ -119,10 +119,8 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 	if (checkIfAlreadyPaid(artifact, file, type, getState)){
 		let state = getState()
 
-		// Set the file to be active if we need.
-		if (state.ActiveArtifactFiles.active !== toUID(artifact, file)){
-			dispatch(setActiveFile(artifact, file))
-		}
+		// Download/set file to be active
+		dispatch(paymentSuccess(artifact, file, type))
 
 		// Since we have already been paid for, prevent further execution.
 		return
