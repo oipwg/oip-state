@@ -108,6 +108,8 @@ const ActiveArtifactFiles = (state = {
 		case actions.FILE_PAY_SUCCESS_BUY:
 		case actions.FILE_PAY_IN_PROGRESS_VIEW:
 		case actions.FILE_PAY_IN_PROGRESS_BUY:
+		case actions.FILE_PAY_CANCEL_VIEW:
+		case actions.FILE_PAY_CANCEL_BUY:
 		case actions.FILE_PAY_ERROR_VIEW:
 		case actions.FILE_PAY_ERROR_BUY:
 			return {
