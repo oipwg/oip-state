@@ -17,7 +17,7 @@ import {
 import { promptLogin } from '../Account/actions'
 
 const waitForLogin = (dispatch, getState) => {
-	return new Promise((resolve) => {
+	return new Promise((resolve, reject) => {
 		const Account = getState().Account
 
 		if (!Account.isLoggedIn) {
