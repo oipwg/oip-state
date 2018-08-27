@@ -5,6 +5,8 @@ export const FILE_PAY_SUCCESS_VIEW = 'FILE_PAY_SUCCESS_VIEW'
 export const FILE_PAY_SUCCESS_BUY = 'FILE_PAY_SUCCESS_BUY'
 export const FILE_PAY_IN_PROGRESS_VIEW = 'FILE_PAY_IN_PROGRESS_VIEW'
 export const FILE_PAY_IN_PROGRESS_BUY = 'FILE_PAY_IN_PROGRESS_BUY'
+export const FILE_PAY_CANCEL_VIEW = 'FILE_PAY_CANCEL_VIEW'
+export const FILE_PAY_CANCEL_BUY = 'FILE_PAY_CANCEL_BUY'
 export const FILE_PAY_ERROR_VIEW = 'FILE_PAY_ERROR_VIEW'
 export const FILE_PAY_ERROR_BUY = 'FILE_PAY_ERROR_BUY'
 
@@ -44,6 +46,18 @@ export const filePayInProgressView = (uid) => ({
 export const filePayInProgressBuy = (uid) => ({
     type: FILE_PAY_IN_PROGRESS_BUY,
     uid
+})
+
+export const filePayCancelView = (uid, error) => ({
+    type: FILE_PAY_CANCEL_VIEW,
+    uid,
+    error
+})
+
+export const filePayCancelBuy = (uid, error) => ({
+    type: FILE_PAY_CANCEL_BUY,
+    uid,
+    error
 })
 
 export const filePayErrorView = (uid, error) => ({

@@ -60,6 +60,22 @@ const file = (state = {
 				payErrorBuy: false,
 				payErrorTextBuy: undefined
 			}
+		case actions.FILE_PAY_CANCEL_VIEW:
+			return {
+				...state,
+				hasPaid: false,
+				paySuccessView: false,
+				payInProgressView: false,
+				payErrorView: false
+			}
+		case actions.FILE_PAY_CANCEL_BUY:
+			return {
+				...state,
+				owned: false,
+				paySuccessBuy: false,
+				payInProgressBuy: false,
+				payErrorBuy: false
+			}
 		case actions.FILE_PAY_ERROR_VIEW:
 			return {
 				...state,

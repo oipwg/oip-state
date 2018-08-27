@@ -10,6 +10,7 @@ import {
 	setActiveFile,
 	paymentSuccess,
 	paymentInProgress,
+	paymentCancel,
 	paymentError
 } from '../ActiveArtifactFiles/thunks'
 
@@ -30,6 +31,14 @@ const waitForLogin = (dispatch, getState) => {
 			if (Account.isLoggedIn) {
 				clearInterval(promptTimeout)
 				resolve()
+			}
+
+			if (!Account.showLoginModal && !Account.showRegisterModal && !Account.isLoggedIn && (Account.loginFailure || Account.registerFailure)){
+				reject("error")
+			}
+
+			if (!Account.showLoginModal && !Account.showRegisterModal && !Account.isLoggedIn && !Account.loginFailure && !Account.registerFailure){
+				reject()
 			}
 		}, 1000)
 	})
@@ -123,7 +132,15 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 	dispatch(paymentInProgress(artifact, file, type))
 
 	// Make sure the user is logged in
-	await waitForLogin(dispatch, getState)
+	try {
+		await waitForLogin(dispatch, getState)
+	} catch (error) {
+		if (error){
+			paymentError(artifact, file, type, "Unable to Login or Register")
+		} else {
+			paymentCancel(artifact, file, type)
+		}
+	}
 
 	// Create an ArtifactPaymentBuilder
 	let wallet = getState().Account.Account.wallet
@@ -174,7 +191,7 @@ export const payForArtifactFile = (artifact, file, type) => async (dispatch, get
 				// rerun preprocess function to update stuff.
 				preprocess = await payment_builder.getPaymentAddressAndAmount()
 			} catch (err) {
-				dispatch(paymentError(artifact, file, type, "Error waiting for Coinbase! " + JSON.stringify(err, null, 4)))
+				dispatch(paymentCancel(artifact, file, type))
 
 				// There was an error/cancel, prevent further execution
 				return
