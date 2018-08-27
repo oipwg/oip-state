@@ -1,14 +1,25 @@
 const downloadFile = function(artifact, file){
 	// Check if we are in the browser
 	if (typeof window !== 'undefined' && artifact && file){
+		// Create the URL
 		let download_file_url = "https://gateway.ipfs.io/ipfs/" + artifact.getLocation() + "/" + file.getFilename()
 
-		let download_tag = document.createElement('a');
+		// Create an a tag
+		let download_tag = window.document.createElement('a');
 		download_tag.style.display = "none";
+		download_tag.id = "download_file_id_ref"
 		download_tag.download = file.getFilename()
-		download_tag.target = "_blank"
 		download_tag.href = download_file_url
-		download_tag.click()
+
+		// Add the a tag to the page
+		window.document.body.appendChild(download_tag)
+
+		// Get the a tag element reference
+		let dl_a_tag = window.document.getElementById("download_file_id_ref")
+		// Click to download the file
+		dl_a_tag.click()
+		// Remove the download button
+		dl_a_tag.parentNode.removeChild(dl_a_tag)
 	}
 }
 
