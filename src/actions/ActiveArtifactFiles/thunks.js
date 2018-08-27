@@ -1,3 +1,5 @@
+import { downloadFile } from '../browser/util'
+
 import { 
 	setActiveArtifactFile, 
 	addToActiveArtifactFiles,
@@ -41,10 +43,12 @@ export const paymentSuccess = (artifact, file, type) => (dispatch, getState) => 
 	if (state.ActiveArtifactFiles.active !== uid)
 		dispatch(setActiveArtifactFile(uid))
 
-	if (type === "buy")
+	if (type === "buy"){
 		dispatch(filePaySuccessBuy(uid))
-	else if (type === "view")
+		downloadFile(artifact, file)
+	} else if (type === "view"){
 		dispatch(filePaySuccessView(uid))
+	}
 }
 
 export const paymentInProgress = (artifact, file, type) => (dispatch) => {
