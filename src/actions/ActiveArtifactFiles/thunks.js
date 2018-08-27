@@ -60,9 +60,9 @@ export const paymentCancel = (artifact, file, type) => (dispatch) => {
 	let uid = toUID(artifact, file)
 
 	if (type === "buy")
-		dispatch(filePayCancelBuy(uid, error_text))
+		dispatch(filePayCancelBuy(uid))
 	else if (type === "view")
-		dispatch(filePayCancelView(uid, error_text))
+		dispatch(filePayCancelView(uid))
 }
 
 export const paymentError = (artifact, file, type, error_text) => (dispatch) => {
