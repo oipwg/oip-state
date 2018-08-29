@@ -25,6 +25,16 @@ export const toUID = (artifact, file) => {
 	}
 }
 
+export const fileToUID = (file) => {
+	let files = file.parent.getFiles();
+
+	for (var i = 0; i < files.length; i++) {
+		if (files[i].getFilename() === file.getFilename() && files[i].getDisplayName() === file.getDisplayName() && files[i].getFilesize() === file.getFilesize()){
+			return file.parent.getTXID() + "|" + i;
+		}
+	}
+};
+
 // Set Active File
 export const setActiveFile = (artifact, file) => dispatch => {
 	dispatch(setActiveArtifactFile(toUID(artifact, file)))
