@@ -84,10 +84,10 @@ const waitForCoinbase = (dispatch, getState, address) => {
 	})
 }
 
-let checkIfAlreadyPaid = (artifact, file, type, getState) => {
+let checkIfAlreadyPaid = (file, type, getState) => {
 	let state = getState()
 
-	let uid = toUID(artifact, file)
+	let uid = fileToUID(file)
 
 	if (state.ActiveArtifactFiles[uid]){
 		if (state.ActiveArtifactFiles[uid].isPaid){
@@ -116,34 +116,35 @@ let checkIfAlreadyPaid = (artifact, file, type, getState) => {
 
 export const payForArtifactFile = (file, type) => async (dispatch, getState) => {
 	// Check to see if we have already paid for the Artifact. If so, prevent payment.
-	if (checkIfAlreadyPaid(file.parent, file, type, getState)){
+	if (checkIfAlreadyPaid(file, type, getState)){
 		let state = getState()
 
 		// Download/set file to be active
-		dispatch(paymentSuccess(file.parent, file, type))
+		dispatch(paymentSuccess(file, type))
 
 		// Since we have already been paid for, prevent further execution.
 		return
 	}
 
 	// Dispatch Payment in Progress
-	dispatch(paymentInProgress(file.parent, file, type))
+	dispatch(paymentInProgress(file, type))
 
 	// Make sure the user is logged in
 	try {
 		await waitForLogin(dispatch, getState)
 	} catch (error) {
 		if (error){
-			dispatch(paymentError(file.parent, file, type, "Unable to Login or Register"))
+			dispatch(paymentError(file, type, "Unable to Login or Register"))
 			return
 		} else {
-			dispatch(paymentCancel(file.parent, file, type))
+			dispatch(paymentCancel(file, type))
 			return
 		}
 	}
 
 	// Create an ArtifactPaymentBuilder
 	let wallet = getState().Account.Account.wallet
+	//@ToDo: refactor everywhere that uses file.parent
 	let payment_builder = new ArtifactPaymentBuilder(wallet, file.parent, file, type)
 
 	// Detect if we are able to make a payment with our current balance
@@ -191,7 +192,7 @@ export const payForArtifactFile = (file, type) => async (dispatch, getState) => 
 				// rerun preprocess function to update stuff.
 				preprocess = await payment_builder.getPaymentAddressAndAmount()
 			} catch (err) {
-				dispatch(paymentCancel(file.parent, file, type))
+				dispatch(paymentCancel(file, type))
 
 				// There was an error/cancel, prevent further execution
 				return
@@ -206,10 +207,10 @@ export const payForArtifactFile = (file, type) => async (dispatch, getState) => 
 			let txid = await payment_builder.pay()
 				
 			// Successful payment!
-			dispatch(paymentSuccess(file.parent, file, type))
+			dispatch(paymentSuccess(file, type))
 		} catch (err) {
 			// Fail on payment error
-			dispatch(paymentError(file.parent, file, type, "Error sending payment!" + err))
+			dispatch(paymentError(file, type, "Error sending payment!" + err))
 
 			// Return to prevent further execution
 			return
@@ -225,7 +226,7 @@ export const payForArtifactFile = (file, type) => async (dispatch, getState) => 
 		}
 	} else {
 		// Fail on preprocess error
-		dispatch(paymentError(file.parent, file, type, "Preprocess not successful after Coinbase Attempt!" + JSON.stringify(preprocess, null, 4)))
+		dispatch(paymentError(file, type, "Preprocess not successful after Coinbase Attempt!" + JSON.stringify(preprocess, null, 4)))
 	}
 }
 

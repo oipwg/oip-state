@@ -36,17 +36,17 @@ export const fileToUID = (file) => {
 };
 
 // Set Active File
-export const setActiveFile = (artifact, file) => dispatch => {
-	dispatch(setActiveArtifactFile(toUID(artifact, file)))
+export const setActiveFile = (file) => dispatch => {
+	dispatch(setActiveArtifactFile(fileToUID(file)))
 }
 
 
-export const addToActiveFiles = (artifact, file) => dispatch => {
-	dispatch(addToActiveArtifactFiles(file, toUID(artifact, file)))
+export const addToActiveFiles = (file) => dispatch => {
+	dispatch(addToActiveArtifactFiles(file, fileToUID(file)))
 }
 
-export const paymentSuccess = (artifact, file, type) => (dispatch, getState) => {
-	let uid = toUID(artifact, file)
+export const paymentSuccess = (file, type) => (dispatch, getState) => {
+	let uid = fileToUID(file)
 
 	let state = getState()
 
@@ -55,14 +55,14 @@ export const paymentSuccess = (artifact, file, type) => (dispatch, getState) => 
 
 	if (type === "buy"){
 		dispatch(filePaySuccessBuy(uid))
-		downloadFile(artifact, file)
+		downloadFile(file)
 	} else if (type === "view"){
 		dispatch(filePaySuccessView(uid))
 	}
 }
 
-export const paymentInProgress = (artifact, file, type) => (dispatch) => {
-	let uid = toUID(artifact, file)
+export const paymentInProgress = (file, type) => (dispatch) => {
+	let uid = fileToUID(file)
 
 	if (type === "buy")
 		dispatch(filePayInProgressBuy(uid))
@@ -70,8 +70,8 @@ export const paymentInProgress = (artifact, file, type) => (dispatch) => {
 		dispatch(filePayInProgressView(uid))
 }
 
-export const paymentCancel = (artifact, file, type) => (dispatch) => {
-	let uid = toUID(artifact, file)
+export const paymentCancel = (file, type) => (dispatch) => {
+	let uid = fileToUID(file)
 
 	if (type === "buy")
 		dispatch(filePayCancelBuy(uid))
@@ -79,8 +79,8 @@ export const paymentCancel = (artifact, file, type) => (dispatch) => {
 		dispatch(filePayCancelView(uid))
 }
 
-export const paymentError = (artifact, file, type, error_text) => (dispatch) => {
-	let uid = toUID(artifact, file)
+export const paymentError = (file, type, error_text) => (dispatch) => {
+	let uid = fileToUID(file)
 
 	if (type === "buy")
 		dispatch(filePayErrorBuy(uid, error_text))

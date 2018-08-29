@@ -17,11 +17,11 @@ export const setActiveArtifact = (artifact, callback) => (dispatch) => {
 	let files = artifact.getFiles()
 	// Add all Files to the ActiveFiles
 	for (let i = 0; i < files.length; i++){
-		dispatch(addToActiveFiles(artifact, files[i]))
+		dispatch(addToActiveFiles(files[i]))
 	}
 
 	// Set the first file to be active (by default)
-	dispatch(setActiveFile(artifact, files[0]))
+	dispatch(setActiveFile(files[0]))
 
 	// Pass back the artifact to a callback if provided
 	if (callback)
