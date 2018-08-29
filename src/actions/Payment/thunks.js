@@ -7,6 +7,7 @@ import {
 
 import {
 	toUID,
+	fileToUID,
 	setActiveFile,
 	paymentSuccess,
 	paymentInProgress,
