@@ -37,7 +37,8 @@ export const fileToUID = (file) => {
 
 // Set Active File
 export const setActiveFile = (file) => dispatch => {
-	dispatch(setActiveArtifactFile(fileToUID(file)))
+	let uid = file ? fileToUID(file) : undefined;
+	dispatch(setActiveArtifactFile(uid))
 }
 
 
