@@ -12,20 +12,21 @@ import { setActiveFile, addToActiveFiles } from '../ActiveArtifactFiles/thunks'
 export const setActiveArtifact = (artifact, callback) => (dispatch) => {
 	// Set the Active Artifact
 	dispatch(_setActiveArtifact(artifact))
+	if (artifact) {
+		// Get all the files in the Artifact
+		let files = artifact.getFiles()
+		// Add all Files to the ActiveFiles
+		for (let i = 0; i < files.length; i++){
+			dispatch(addToActiveFiles(files[i]))
+		}
 
-	// Get all the files in the Artifact
-	let files = artifact.getFiles()
-	// Add all Files to the ActiveFiles
-	for (let i = 0; i < files.length; i++){
-		dispatch(addToActiveFiles(files[i]))
+		// Set the first file to be active (by default)
+		dispatch(setActiveFile(files[0]))
+
+		// Pass back the artifact to a callback if provided
+		if (callback)
+			callback(artifact)
 	}
-
-	// Set the first file to be active (by default)
-	dispatch(setActiveFile(files[0]))
-
-	// Pass back the artifact to a callback if provided
-	if (callback)
-		callback(artifact)
 }
 
 export const loadActiveArtifact = (txid, callback) => async (dispatch, getState) => {
