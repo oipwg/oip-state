@@ -46,5 +46,5 @@ const createStoreFn = () => {
 
 // Export the store we created
 export {
-	createStore: createStoreFn
+	createStoreFn as createStore
 }
