@@ -4,7 +4,6 @@ const file = (state = {
 	owned: false,
 	isPaid: false,
 	hasPaid: false,
-
 	paySuccessView: false,
 	paySuccessBuy: false,
 	payInProgressView: false,
@@ -13,7 +12,10 @@ const file = (state = {
 	payErrorBuy: false,
 	payErrorTextView: undefined,
 	payErrorTextBuy: undefined,
-	
+	isPlaying: false,
+	isPaused: false,
+	duration: undefined,
+	currentTime: undefined,
 	ArtifactFile: undefined
 }, action) => {
 	switch (action.type) {
@@ -94,6 +96,22 @@ const file = (state = {
 				payErrorBuy: true,
 				payErrorTextBuy: action.error
 			}
+		case actions.PLAY_PAUSE_FILE:
+			return {
+				...state,
+				isPlaying: action.bool,
+				isPaused: !action.bool
+			}
+		case actions.SET_CURRENT_TIME:
+			return {
+				...state,
+				currentTime: action.currentTime
+			}
+		case actions.SET_DURATION:
+			return {
+				...state,
+				duration: action.duration
+			}
 		default:
 			return state
 	}
@@ -112,6 +130,9 @@ const ActiveArtifactFiles = (state = {
 		case actions.FILE_PAY_CANCEL_BUY:
 		case actions.FILE_PAY_ERROR_VIEW:
 		case actions.FILE_PAY_ERROR_BUY:
+		case actions.PLAY_PAUSE_FILE:
+		case actions.SET_CURRENT_TIME:
+		case actions.SET_DURATION:
 			return {
 				...state,
 				[action.uid]: file(state[action.uid], action)
