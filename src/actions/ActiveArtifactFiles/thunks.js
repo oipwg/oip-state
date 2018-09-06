@@ -57,7 +57,7 @@ export const manageMediaState = (uid, file, type) => (dispatch, getState) => {
 
 	if (state.ActiveArtifactFiles[uid].isPlaying) {
 		dispatch(playPauseAudioFile(uid, false))
-	} else { dispatch(playPauseAudioFile(uid, true))}
+	} else {dispatch(playPauseAudioFile(uid, true))}
 }
 
 export const paymentSuccess = (file, type) => (dispatch, getState) => {
