@@ -78,8 +78,8 @@ export const filePayErrorBuy = (uid, error) => ({
 //true for play, false for pause
 export const playPauseAudioFile = (uid, bool) => ({
 	type: PLAY_PAUSE_FILE,
-	uid,
-	bool
+	uid: uid,
+	bool: bool
 })
 
 export const setCurrentTime = (uid, time) => ({

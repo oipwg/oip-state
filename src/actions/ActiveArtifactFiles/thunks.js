@@ -1,7 +1,7 @@
 import { downloadFile } from '../../browser/util'
 
-import { 
-	setActiveArtifactFile, 
+import {
+	setActiveArtifactFile,
 	addToActiveArtifactFiles,
 	filePaySuccessView,
 	filePaySuccessBuy,
@@ -10,7 +10,8 @@ import {
 	filePayCancelView,
 	filePayCancelBuy,
 	filePayErrorView,
-	filePayErrorBuy
+	filePayErrorBuy,
+	playPauseAudioFile
 } from "./actions";
 
 // -------------------------------------------------------------------------------------------------
@@ -60,6 +61,10 @@ export const paymentSuccess = (file, type) => (dispatch, getState) => {
 	} else if (type === "view"){
 		dispatch(filePaySuccessView(uid))
 	}
+
+	if (state.ActiveArtifactFiles[state.ActiveArtifactFiles.active].isPlaying) {
+		dispatch(playPauseAudioFile(uid, false))
+	} else { dispatch(playPauseAudioFile(uid, true))}
 }
 
 export const paymentInProgress = (file, type) => (dispatch) => {
