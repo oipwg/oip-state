@@ -36,15 +36,28 @@ export const fileToUID = (file) => {
 	}
 };
 
+export const getFileExtension = (file) => {
+	let splitFilename = file.getFilename().split(".");
+	let indexToGrab = splitFilename.length - 1;
+	return splitFilename[indexToGrab].toLowerCase();
+}
+
 // Set Active File
 export const setActiveFile = (file) => dispatch => {
 	let uid = file ? fileToUID(file) : undefined;
 	dispatch(setActiveArtifactFile(uid))
 }
 
-
 export const addToActiveFiles = (file) => dispatch => {
 	dispatch(addToActiveArtifactFiles(file, fileToUID(file)))
+}
+
+export const manageMediaState = (uid, file, type) => (dispatch, getState) => {
+	let state = getState();
+
+	if (state.ActiveArtifactFiles[uid].isPlaying) {
+		dispatch(playPauseAudioFile(uid, false))
+	} else { dispatch(playPauseAudioFile(uid, true))}
 }
 
 export const paymentSuccess = (file, type) => (dispatch, getState) => {
@@ -62,9 +75,7 @@ export const paymentSuccess = (file, type) => (dispatch, getState) => {
 		dispatch(filePaySuccessView(uid))
 	}
 
-	if (state.ActiveArtifactFiles[state.ActiveArtifactFiles.active].isPlaying) {
-		dispatch(playPauseAudioFile(uid, false))
-	} else { dispatch(playPauseAudioFile(uid, true))}
+	dispatch(manageMediaState(uid, file, type))
 }
 
 export const paymentInProgress = (file, type) => (dispatch) => {
