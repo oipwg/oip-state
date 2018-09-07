@@ -11,7 +11,8 @@ import {
 	filePayCancelBuy,
 	filePayErrorView,
 	filePayErrorBuy,
-	playPauseAudioFile
+	playFile,
+	pauseFile
 } from "./actions";
 
 // -------------------------------------------------------------------------------------------------
@@ -53,12 +54,14 @@ export const addToActiveFiles = (file) => dispatch => {
 	dispatch(addToActiveArtifactFiles(file, fileToUID(file)))
 }
 
-export const manageMediaState = (uid, file, type) => (dispatch, getState) => {
+export const updateMediaState = (uid, file, type) => (dispatch, getState) => {
 	let state = getState();
 
 	if (state.ActiveArtifactFiles[uid].isPlaying) {
-		dispatch(playPauseAudioFile(uid, false))
-	} else {dispatch(playPauseAudioFile(uid, true))}
+		dispatch(pauseFile(uid))
+	} else {
+		dispatch(playFile(uid))
+	}
 }
 
 export const paymentSuccess = (file, type) => (dispatch, getState) => {
@@ -76,7 +79,7 @@ export const paymentSuccess = (file, type) => (dispatch, getState) => {
 		dispatch(filePaySuccessView(uid))
 	}
 
-	dispatch(manageMediaState(uid, file, type))
+	dispatch(updateMediaState(uid, file, type))
 }
 
 export const paymentInProgress = (file, type) => (dispatch) => {

@@ -96,11 +96,17 @@ const file = (state = {
 				payErrorBuy: true,
 				payErrorTextBuy: action.error
 			}
-		case actions.PLAY_PAUSE_FILE:
+		case actions.PLAY_FILE:
 			return {
 				...state,
-				isPlaying: action.bool,
-				isPaused: !action.bool
+				isPlaying: true,
+				isPaused: false
+			}
+		case actions.PAUSE_FILE:
+			return {
+				...state,
+				isPlaying: false,
+				isPaused: true
 			}
 		case actions.SET_CURRENT_TIME:
 			return {
@@ -130,7 +136,8 @@ const ActiveArtifactFiles = (state = {
 		case actions.FILE_PAY_CANCEL_BUY:
 		case actions.FILE_PAY_ERROR_VIEW:
 		case actions.FILE_PAY_ERROR_BUY:
-		case actions.PLAY_PAUSE_FILE:
+		case actions.PLAY_FILE:
+		case actions.PAUSE_FILE:
 		case actions.SET_CURRENT_TIME:
 		case actions.SET_DURATION:
 			return {

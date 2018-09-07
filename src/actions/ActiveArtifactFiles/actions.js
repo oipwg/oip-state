@@ -9,7 +9,9 @@ export const FILE_PAY_CANCEL_VIEW = 'FILE_PAY_CANCEL_VIEW'
 export const FILE_PAY_CANCEL_BUY = 'FILE_PAY_CANCEL_BUY'
 export const FILE_PAY_ERROR_VIEW = 'FILE_PAY_ERROR_VIEW'
 export const FILE_PAY_ERROR_BUY = 'FILE_PAY_ERROR_BUY'
-export const PLAY_PAUSE_FILE = 'PLAY_PAUSE_FILE'
+
+export const PLAY_FILE = 'PLAY_FILE'
+export const PAUSE_FILE = 'PAUSE_FILE'
 export const SET_CURRENT_TIME = 'SET_CURRENT_TIME'
 export const SET_DURATION = 'SET_DURATION'
 
@@ -76,10 +78,14 @@ export const filePayErrorBuy = (uid, error) => ({
 })
 
 //true for play, false for pause
-export const playPauseAudioFile = (uid, bool) => ({
-	type: PLAY_PAUSE_FILE,
-	uid: uid,
-	bool: bool
+export const playFile = (uid) => ({
+	type: PLAY_FILE,
+	uid: uid
+})
+
+export const pauseFile = (uid) => ({
+    type: PAUSE_FILE,
+    uid: uid
 })
 
 export const setCurrentTime = (uid, time) => ({
