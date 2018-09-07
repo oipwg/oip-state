@@ -57,6 +57,12 @@ export const addToActiveFiles = (file) => dispatch => {
 export const updateMediaState = (uid, file, type) => (dispatch, getState) => {
 	let state = getState();
 
+	for (let id in state.ActiveArtifactFiles){
+		if (id !== "active" && id !== uid && state.ActiveArtifactFiles[id].isPlaying){
+			dispatch(pauseFile(id))
+		}
+	}
+
 	if (state.ActiveArtifactFiles[uid].isPlaying) {
 		dispatch(pauseFile(uid))
 	} else {
