@@ -27,6 +27,7 @@ export const toUID = (artifact, file) => {
 }
 
 export const fileToUID = (file) => {
+	if (file === undefined) {return undefined}
 	let files = file.parent.getFiles();
 
 	for (var i = 0; i < files.length; i++) {
