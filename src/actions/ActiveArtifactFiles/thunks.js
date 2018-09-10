@@ -81,10 +81,13 @@ export const skipBack = () => (dispatch, getState) => {
 	// Grab the ArtifactFile right before the active one
 	for (let uid in state.ActiveArtifactFiles){
 		if (uid !== 'active' && !matched){
-			if (uid !== state.ActiveArtifactFiles.active)
-				previous_file_uid = uid
-			else
+			if (uid !== state.ActiveArtifactFiles.active){
+				if (state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Audio" || state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Video"){
+					previous_file_uid = uid
+				}
+			} else {
 				matched = true
+			}
 		}
 
 		if (uid !== "active"){
@@ -134,8 +137,11 @@ export const skipForward = () => (dispatch, getState) => {
 			}
 
 			// Check if we have matched, but we haven't set the next file yet
-			if (matched && !next_file_uid)
-				next_file_uid = uid
+			if (matched && !next_file_uid){
+				if (state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Audio" || state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Video"){
+					next_file_uid = uid
+				}
+			}
 
 			// Check if we are a match
 			if (uid === state.ActiveArtifactFiles.active)
