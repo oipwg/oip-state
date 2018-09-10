@@ -2,7 +2,9 @@ import {ArtifactPaymentBuilder} from 'oip-account'
 
 import {
 	promptCoinbaseModal,
-	setCoinbaseInfo
+	setCoinbaseInfo,
+	coinbasePending,
+	coinbaseComplete
 } from "./actions"
 
 import {
@@ -66,18 +68,20 @@ const waitForCoinbase = (dispatch, getState, address) => {
 	return new Promise((resolve, reject) => {
 		address.onWebsocketUpdate((addr) => {
 			clearInterval(promptTimeout)
+			dispatch(coinbaseComplete())
 			resolve()
 		})
 
 		listenForBalanceUpdate(address, () => {
 			clearInterval(promptTimeout)
+			dispatch(coinbaseComplete())
 			resolve()
 		})
 
 		let promptTimeout = setInterval(() => {
 			let Payment = getState().Payment
 
-			if (!Payment.showCoinbaseModal) {
+			if (!Payment.showCoinbaseModal && !Payment.coinbasePending) {
 				clearInterval(promptTimeout)
 				reject()
 			}
@@ -237,8 +241,7 @@ export const handleCoinbaseModalEvents = (event) => (dispatch, getState) => {
 			dispatch(promptCoinbaseModal(false))
 			break
 		case "success":
-			// @ToDo: Show a waiting modal after the coinbase modal so that we can wait for the balance to come in
-			// dispatch(promptCoinbaseModal(false))
+			dispatch(coinbasePending())
 			break
 		case "cancel":
 			dispatch(promptCoinbaseModal(false))
