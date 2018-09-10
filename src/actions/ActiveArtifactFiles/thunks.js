@@ -58,6 +58,8 @@ export const addToActiveFiles = (file) => dispatch => {
 // ------------------- Media Manipulation ------------------- 
 
 export const pauseAllExceptActive = () => (dispatch, getState) => {
+	let state = getState()
+	
 	for (let id in state.ActiveArtifactFiles){
 		if (id !== "active" && id !== uid && state.ActiveArtifactFiles[id].isPlaying){
 			dispatch(pauseFile(id))
@@ -97,7 +99,7 @@ export const skipBack = () => (dispatch, getState) => {
 	// If we did match, then set it to active and playing
 	if (previous_file_uid){
 		dispatch(setActiveArtifactFile(previous_file_uid))
-		
+
 		dispatch(pauseAllExceptActive())
 
 		dispatch(playFile(previous_file_uid))
