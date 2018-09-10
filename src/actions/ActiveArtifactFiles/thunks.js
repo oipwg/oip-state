@@ -87,8 +87,12 @@ export const skipBack = () => (dispatch, getState) => {
 				matched = true
 		}
 
-		if (uid !== "active")
-			last_file_uid = uid
+		if (uid !== "active"){
+			// Make sure we are an audio or video file
+			if (state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Audio" || state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Video"){
+				last_file_uid = uid
+			}
+		}
 	}
 
 	// Check if we matched to the first item, and if we did,
@@ -122,8 +126,12 @@ export const skipForward = () => (dispatch, getState) => {
 		if (uid !== 'active'){
 			// Check if we have grabbed a UID yet for the first
 			// file. If not, then grab it.
-			if (!first_file_uid)
-				first_file_uid = uid
+			if (!first_file_uid){
+				// Check if we are an audio or video file
+				if (state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Audio" || state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Video"){
+					first_file_uid = uid
+				}
+			}
 
 			// Check if we have matched, but we haven't set the next file yet
 			if (matched && !next_file_uid)
