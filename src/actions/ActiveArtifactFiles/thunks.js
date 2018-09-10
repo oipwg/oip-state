@@ -57,9 +57,9 @@ export const addToActiveFiles = (file) => dispatch => {
 
 // ------------------- Media Manipulation ------------------- 
 
-export const pauseAllExceptActive = () => (dispatch, getState) => {
+export const pauseAllExcept = (uid) => (dispatch, getState) => {
 	let state = getState()
-	
+
 	for (let id in state.ActiveArtifactFiles){
 		if (id !== "active" && id !== uid && state.ActiveArtifactFiles[id].isPlaying){
 			dispatch(pauseFile(id))
@@ -100,7 +100,7 @@ export const skipBack = () => (dispatch, getState) => {
 	if (previous_file_uid){
 		dispatch(setActiveArtifactFile(previous_file_uid))
 
-		dispatch(pauseAllExceptActive())
+		dispatch(pauseAllExcept(previous_file_uid))
 
 		dispatch(playFile(previous_file_uid))
 	}
@@ -144,7 +144,7 @@ export const skipForward = () => (dispatch, getState) => {
 	if (next_file_uid){
 		dispatch(setActiveArtifactFile(next_file_uid))
 
-		dispatch(pauseAllExceptActive())
+		dispatch(pauseAllExcept(next_file_uid))
 
 		dispatch(playFile(next_file_uid))
 	}
@@ -153,7 +153,7 @@ export const skipForward = () => (dispatch, getState) => {
 export const updateMediaState = (uid, file, type) => (dispatch, getState) => {
 	let state = getState();
 
-	dispatch(pauseAllExceptActive())
+	dispatch(pauseAllExcept(uid))
 
 	if (state.ActiveArtifactFiles[uid].isPlaying) {
 		dispatch(pauseFile(uid))
