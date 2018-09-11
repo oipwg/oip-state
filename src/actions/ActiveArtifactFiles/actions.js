@@ -15,6 +15,10 @@ export const PAUSE_FILE = 'PAUSE_FILE'
 export const SET_CURRENT_TIME = 'SET_CURRENT_TIME'
 export const SET_DURATION = 'SET_DURATION'
 
+export const SET_VOLUME = 'SET_VOLUME'
+export const SET_MUTE = 'SET_MUTE'
+export const SET_UNMUTE = 'SET_UNMUTE'
+
 // -------------------------------------------------------------------------------------------------
 
 export const setActiveArtifactFile = (uid) => ({
@@ -98,4 +102,19 @@ export const setDuration = (uid, duration) => ({
 	type: SET_DURATION,
 	uid,
 	duration
+})
+
+export const setVolume = (uid) => ({
+	type: SET_VOLUME,
+	uid
+})
+
+export const setMute = (uid) => ({
+	type: SET_MUTE,
+	uid
+})
+
+export const setUnmute = (uid) => ({
+	type: SET_UNMUTE,
+	uid
 })

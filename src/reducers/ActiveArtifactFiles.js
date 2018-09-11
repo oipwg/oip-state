@@ -118,6 +118,21 @@ const file = (state = {
 				...state,
 				duration: action.duration
 			}
+		case actions.SET_VOLUME:
+			return {
+				...state,
+				volume: action.volume
+			}
+		case actions.SET_MUTE:
+			return {
+				...state,
+				mute: true
+			}
+		case actions.SET_UNMUTE:
+			return {
+				...state,
+				mute: false
+			}
 		default:
 			return state
 	}
@@ -140,6 +155,9 @@ const ActiveArtifactFiles = (state = {
 		case actions.PAUSE_FILE:
 		case actions.SET_CURRENT_TIME:
 		case actions.SET_DURATION:
+		case actions.SET_VOLUME:
+		case actions.SET_MUTE:
+		case actions.SET_UNMUTE:
 			return {
 				...state,
 				[action.uid]: file(state[action.uid], action)
