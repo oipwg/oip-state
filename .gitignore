@@ -63,3 +63,5 @@ typings/
 
 #JetBrains
 .idea
+.DS_Store
+lib/*
