@@ -122,6 +122,15 @@ const Account = (state = {
 				...state,
 				Account: action.account
 			}
+		case actions.CLEAR_ACCOUNT_ERRORS:
+			return {
+				...state,
+				loginFailure: false,
+				loginErrorType: undefined,
+				loginErrorMessage: undefined,	
+				registerFailure: false,
+				registerErrorMessage: undefined
+			}
 		default:
 			return state
 	}

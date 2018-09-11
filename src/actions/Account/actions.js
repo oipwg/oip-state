@@ -6,11 +6,12 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const PROMPT_REGISTER = 'PROMPT_REGISTER'
 export const REGISTER_FETCHING = 'REGISTER_FETCHING'
 export const REGISTER_FAILURE = 'REGISTER_FAILURE'
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
-
-export const SET_ACCOUNT = 'SET_ACCOUNT';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 
 export const LOGOUT = 'LOGOUT'
+
+export const SET_ACCOUNT = 'SET_ACCOUNT'
+export const CLEAR_ACCOUNT_ERRORS = 'CLEAR_ACCOUNT_ERRORS'
 
 // --------------------------------------------------------------------------------
 
@@ -59,11 +60,15 @@ export const registerFailure = (error_message) => ({
 
 
 // ------------ Other ------------
+export const logout = () => ({
+	type: LOGOUT
+})
+
 export const setAccount = account => ({
 	type: SET_ACCOUNT,
 	account
 })
 
-export const logout = () => ({
-	type: LOGOUT
+export const clearAccountErrors = () => ({
+	type: CLEAR_ACCOUNT_ERRORS
 })
