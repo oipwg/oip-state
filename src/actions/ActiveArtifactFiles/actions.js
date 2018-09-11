@@ -88,10 +88,10 @@ export const pauseFile = (uid) => ({
     uid: uid
 })
 
-export const setCurrentTime = (uid, time) => ({
+export const setCurrentTime = (uid, currentTime) => ({
 	type: SET_CURRENT_TIME,
 	uid,
-	time
+	currentTime
 });
 
 export const setDuration = (uid, duration) => ({
