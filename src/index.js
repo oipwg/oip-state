@@ -10,41 +10,49 @@ import ActiveArtifactFiles from './reducers/ActiveArtifactFiles'
 import OIPIndex from './reducers/OIPIndex'
 import Payment from './reducers/Payment'
 
-const reducers = { Account, ActiveArtifact, ActiveArtifactFiles, OIPIndex, Payment }
-
-// Create the logger to log Actions to the console
-const logger = createLogger({
-    collapsed: true
-});
-
-// Create Redux Middleware
-let middleware = [ logger, thunk ];
-
-let composeEnhancers
-
-// Compose a "name" for the window.
-if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__){
-	composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        name: "OIP State"
-    }) 
-} else {
-	composeEnhancers = compose
-}
-
-// Use the Middlewear and create an "enhancer"
-const enhancer = composeEnhancers(
-    applyMiddleware(...middleware),
-    // other store enhancers if any
-);
+// Export our Actions and Thunks
+export * from './actions/Account/actions'
+export * from './actions/Account/thunks'
+export * from './actions/ActiveArtifact/actions'
+export * from './actions/ActiveArtifact/thunks'
+export * from './actions/ActiveArtifactFiles/actions'
+export * from './actions/ActiveArtifactFiles/thunks'
+export * from './actions/Payment/actions'
+export * from './actions/Payment/thunks'
 
 // Create our Store
-// const store = createStore(combineReducers(reducers), enhancer);
+const createStoreFn = (options = {}) => {
+	const reducers = { Account, ActiveArtifact, ActiveArtifactFiles, OIPIndex, Payment }
 
-const createStoreFn = () => {
+	// Create the logger to log Actions to the console
+	const logger = createLogger({
+	    collapsed: true
+	});
+
+	// Create Redux Middleware
+	let middleware = [ logger, thunk ];
+
+	let composeEnhancers
+
+	// Compose a "name" for the window.
+	if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__){
+		composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+	        name: options.title || "OIP State"
+	    }) 
+	} else {
+		composeEnhancers = compose
+	}
+
+	// Use the Middlewear and create an "enhancer"
+	const enhancer = composeEnhancers(
+	    applyMiddleware(...middleware),
+	    // other store enhancers if any
+	);
+
 	return createStore(combineReducers(reducers), enhancer)
 }
 
-// Export the store we created
+// Export the createStore function AND all other functions from other classes
 export {
 	createStoreFn as createStore
 }
