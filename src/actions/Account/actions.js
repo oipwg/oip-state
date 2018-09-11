@@ -30,8 +30,9 @@ export const loginSuccess = (account) => ({
 	account
 })
 
-export const loginFailure = (error_message) => ({
+export const loginFailure = (error_type, error_message) => ({
 	type: LOGIN_FAILURE,
+	errorType: error_type,
 	errorMessage: error_message
 })
 

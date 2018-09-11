@@ -73,6 +73,6 @@ export const accountLogin = (username, pw, options) => async (dispatch) => {
 		//dispatch(fetchCryptoBalances(account.wallet))
 		//dispatch(fetchWalletAddresses(account.wallet))
 	} catch (err) {
-		dispatch(loginFailure(err.message))
+		dispatch(loginFailure(err.name, err.message))
 	}
 }

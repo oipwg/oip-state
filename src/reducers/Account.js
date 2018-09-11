@@ -6,6 +6,7 @@ const Account = (state = {
 	loginFetching: false,
 	loginFailure: false,
 	isLoggedIn: false,
+	loginErrorType: undefined,
 	loginErrorMessage: undefined,
 	showRegisterModal: false,
 	registerFetching: false,
@@ -21,6 +22,7 @@ const Account = (state = {
 				loginFetching: false,
 				loginFailure: false,
 				isLoggedIn: false,
+				loginErrorType: undefined,
 				loginErrorMessage: undefined,
 				showRegisterModal: false,
 				registerFetching: false,
@@ -34,6 +36,7 @@ const Account = (state = {
 				loginFetching: true,
 				loginFailure: false,
 				isLoggedIn: false,
+				loginErrorType: undefined,
 				loginErrorMessage: undefined
 			}
 		case actions.LOGIN_FAILURE:
@@ -42,6 +45,7 @@ const Account = (state = {
 				loginFailure: true,
 				loginFetching: false,
 				isLoggedIn: false,
+				loginErrorType: action.errorType,
 				loginErrorMessage: action.errorMessage
 			}
 		case actions.LOGIN_SUCCESS:
@@ -50,6 +54,8 @@ const Account = (state = {
 				loginFetching: false,
 				loginFailure: false,
 				isLoggedIn: true,
+				loginErrorType: undefined,
+				loginErrorMessage: undefined,
 				showLoginModal: false,
 				showRegisterModal: false,
 				Account: action.account
@@ -61,6 +67,7 @@ const Account = (state = {
 				loginFetching: false,
 				loginFailure: false,
 				isLoggedIn: false,
+				loginErrorType: undefined,
 				loginErrorMessage: undefined,
 				showRegisterModal: action.prompt,
 				registerFetching: false,
@@ -102,6 +109,7 @@ const Account = (state = {
 				loginFetching: false,
 				loginFailure: false,
 				isLoggedIn: false,
+				loginErrorType: undefined,
 				loginErrorMessage: undefined,
 				showRegisterModal: false,
 				registerFetching: false,
