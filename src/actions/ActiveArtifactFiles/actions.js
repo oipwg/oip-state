@@ -104,9 +104,10 @@ export const setDuration = (uid, duration) => ({
 	duration
 })
 
-export const setVolume = (uid) => ({
+export const setVolume = (uid, volume) => ({
 	type: SET_VOLUME,
-	uid
+	uid,
+	volume
 })
 
 export const setMute = (uid) => ({
