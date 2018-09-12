@@ -15,6 +15,8 @@ import {
 	pauseFile
 } from "./actions";
 
+import { payForArtifactFile } from '../Payment/thunks'
+
 // ------------------- HELPERS ------------------- 
 
 export const toUID = (artifact, file) => {
@@ -74,8 +76,8 @@ export const skipBack = () => (dispatch, getState) => {
 	if (!state.ActiveArtifactFiles.active)
 		return
 
-	let previous_file_uid
-	let last_file_uid
+	let previous_file
+	let last_file
 	let matched = false
 
 	// Grab the ArtifactFile right before the active one
@@ -83,7 +85,7 @@ export const skipBack = () => (dispatch, getState) => {
 		if (uid !== 'active' && !matched){
 			if (uid !== state.ActiveArtifactFiles.active){
 				if (state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Audio" || state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Video"){
-					previous_file_uid = uid
+					previous_file = state.ActiveArtifactFiles[uid].ArtifactFile
 				}
 			} else {
 				matched = true
@@ -93,23 +95,19 @@ export const skipBack = () => (dispatch, getState) => {
 		if (uid !== "active"){
 			// Make sure we are an audio or video file
 			if (state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Audio" || state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Video"){
-				last_file_uid = uid
+				last_file_uid = state.ActiveArtifactFiles[uid].ArtifactFile
 			}
 		}
 	}
 
 	// Check if we matched to the first item, and if we did,
-	// then to set the previous_file_uid to the last_file_uid 
-	if (matched && !previous_file_uid)
-		previous_file_uid = last_file_uid
+	// then to set the previous_file to the last_file 
+	if (matched && !previous_file)
+		previous_file = last_file
 
 	// If we did match, then set it to active and playing
-	if (previous_file_uid){
-		dispatch(setActiveArtifactFile(previous_file_uid))
-
-		dispatch(pauseAllExcept(previous_file_uid))
-
-		dispatch(playFile(previous_file_uid))
+	if (previous_file){
+		dispatch(payForArtifactFile(previous_file, 'view'))
 	}
 }
 
@@ -120,26 +118,26 @@ export const skipForward = () => (dispatch, getState) => {
 	if (!state.ActiveArtifactFiles.active)
 		return
 
-	let next_file_uid
-	let first_file_uid
+	let next_file
+	let first_file
 	let matched = false
 
 	// Grab the ArtifactFile right before the active one
 	for (let uid in state.ActiveArtifactFiles){
 		if (uid !== 'active'){
-			// Check if we have grabbed a UID yet for the first
-			// file. If not, then grab it.
-			if (!first_file_uid){
+			// Check if we have grabbed the first file.
+			// If not, then grab it.
+			if (!first_file){
 				// Check if we are an audio or video file
 				if (state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Audio" || state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Video"){
-					first_file_uid = uid
+					first_file = state.ActiveArtifactFiles[uid].ArtifactFile
 				}
 			}
 
 			// Check if we have matched, but we haven't set the next file yet
 			if (matched && !next_file_uid){
 				if (state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Audio" || state.ActiveArtifactFiles[uid].ArtifactFile.getType() === "Video"){
-					next_file_uid = uid
+					next_file = state.ActiveArtifactFiles[uid].ArtifactFile
 				}
 			}
 
@@ -150,17 +148,13 @@ export const skipForward = () => (dispatch, getState) => {
 	}
 
 	// Check if we matched to the last item, and if we did,
-	// then to set the next_file_uid to the first_file_uid 
-	if (matched && !next_file_uid)
-		next_file_uid = first_file_uid
+	// then to set the next_file to the first_file 
+	if (matched && !next_file)
+		next_file = first_file
 
 	// If we did match, then set it to active and playing
-	if (next_file_uid){
-		dispatch(setActiveArtifactFile(next_file_uid))
-
-		dispatch(pauseAllExcept(next_file_uid))
-
-		dispatch(playFile(next_file_uid))
+	if (next_file){
+		dispatch(payForArtifactFile(next_file, 'view'))
 	}
 }
 
