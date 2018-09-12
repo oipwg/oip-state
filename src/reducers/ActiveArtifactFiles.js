@@ -15,6 +15,7 @@ const file = (state = {
 	isPlaying: false,
 	isPaused: false,
 	duration: undefined,
+	volume: 1,
 	currentTime: undefined,
 	ArtifactFile: undefined
 }, action) => {
