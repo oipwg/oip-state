@@ -1,6 +1,6 @@
 {
   "name": "oip-state",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "Easily manage a global application state for an OIP Platform",
   "main": "lib/index.js",
   "scripts": {
