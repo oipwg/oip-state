@@ -16,6 +16,7 @@ const file = (state = {
 	isPaused: false,
 	duration: undefined,
 	volume: 1,
+	prevVolume: 1,
 	currentTime: undefined,
 	ArtifactFile: undefined
 }, action) => {
@@ -122,17 +123,20 @@ const file = (state = {
 		case actions.SET_VOLUME:
 			return {
 				...state,
-				volume: action.volume
+				volume: action.volume,
+				prevVolume: action.volume
 			}
 		case actions.SET_MUTE:
 			return {
 				...state,
-				mute: true
+				mute: true,
+				volume: 0
 			}
 		case actions.SET_UNMUTE:
 			return {
 				...state,
-				mute: false
+				mute: false,
+				volume: state.prevVolume
 			}
 		default:
 			return state
