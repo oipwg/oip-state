@@ -2,7 +2,7 @@ const downloadFile = function(file){
 	// Check if we are in the browser
 	if (typeof window !== 'undefined' && file){
 		// Create the URL
-		let download_file_url = "https://gateway.ipfs.io/ipfs/" + file.parent.getLocation() + "/" + file.getFilename()
+		let download_file_url = "https://ipfs.oip.io/ipfs/" + file.parent.getLocation() + "/" + file.getFilename()
 
 		// Create an a tag
 		let download_tag = window.document.createElement('a');
