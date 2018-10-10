@@ -2,13 +2,20 @@ const downloadFile = function(file){
 	// Check if we are in the browser
 	if (typeof window !== 'undefined' && file){
 		// Create the URL
-		let download_file_url = "https://ipfs.oip.io/ipfs/" + file.parent.getLocation() + "/" + file.getFilename()
+		let domain_to_use = "https://ipfs.oip.io/ipfs/"
+
+		// If we are on oip.io, custom redirect :)
+		if (window.location && window.location.origin && window.location.origin === "https://oip.io"){
+			// Set to the current domain
+			domain_to_use = "https://ipfs.oip.io/ipfs-dl/"
+		}
+		let download_file_url = domain_to_use + file.parent.getLocation() + "/" + file.getFilename()
 
 		// Create an a tag
 		let download_tag = window.document.createElement('a');
 		download_tag.style.display = "none";
 		download_tag.id = "download_file_id_ref"
-		download_tag.download = true
+		download_tag.download = file.getFilename()
 		download_tag.target = "_blank"
 		download_tag.href = download_file_url
 
